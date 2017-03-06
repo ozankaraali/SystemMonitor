@@ -138,7 +138,7 @@ public class SystemInfoTest2 {
         System.out.println("  serialnumber: " + baseboard.getSerialNumber());
     }
 
-    private static void printProcessor(CentralProcessor processor) {
+    private static void printProcessor(CentralProcessor processor) { //done
         System.out.println(processor);
         System.out.println(" " + processor.getPhysicalProcessorCount() + " physical CPU(s)");
         System.out.println(" " + processor.getLogicalProcessorCount() + " logical CPU(s)");
