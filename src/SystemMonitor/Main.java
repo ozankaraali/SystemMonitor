@@ -40,7 +40,9 @@ public class Main {
         MemoryInfo.setupOSHI(si, hal, os);
         // DiskInfo doesn't use OSHI but let's set it up anyways ¯\_(ツ)_/¯
         PowerSource[] sources = hal.getPowerSources();
-        System.out.println(sources[0].getName());
+        for(PowerSource source: sources) {
+            System.out.println(source.getName());
+        }
         DiskInfo.setup();
     }
 }

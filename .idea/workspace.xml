@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83a0f96c-6d6a-42a0-b7f8-75d62c352478" name="Default" comment="CPUInfo (WIP)">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/SystemMonitor/BatteryInfo.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SystemMonitor/Main.java" afterPath="$PROJECT_DIR$/src/SystemMonitor/Main.java" />
     </list>
@@ -29,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SystemMonitor/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
+            <state relative-caret-position="464">
+              <caret line="43" column="37" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,7 +40,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BatteryInfo.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BatteryInfo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SystemMonitor/BatteryInfo.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
@@ -506,12 +505,12 @@
       <workItem from="1488908170695" duration="640000" />
       <workItem from="1488963114094" duration="6986000" />
       <workItem from="1488973666109" duration="164000" />
-      <workItem from="1488981308437" duration="5908000" />
+      <workItem from="1488981308437" duration="6004000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22824000" />
+    <option name="totallyTimeSpent" value="22920000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -823,16 +822,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SystemMonitor/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SystemMonitor/Disk.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -848,6 +837,16 @@
         <state relative-caret-position="225">
           <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SystemMonitor/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="43" column="37" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
