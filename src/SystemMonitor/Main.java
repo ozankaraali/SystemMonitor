@@ -2,7 +2,7 @@ package SystemMonitor;
 
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
-import oshi.jna.platform.windows.PowrProf;
+import oshi.hardware.PowerSource;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
 
@@ -38,8 +38,9 @@ public class Main {
         OperatingSystem os = si.getOperatingSystem();
         ProcessorInfo.setupOSHI(si, hal, os);
         MemoryInfo.setupOSHI(si, hal, os);
-        BatteryInfo.setupOSHI(si, hal, os);
         // DiskInfo doesn't use OSHI but let's set it up anyways ¯\_(ツ)_/¯
+        PowerSource[] sources = hal.getPowerSources();
+        System.out.println(sources[0].getName());
         DiskInfo.setup();
     }
 }

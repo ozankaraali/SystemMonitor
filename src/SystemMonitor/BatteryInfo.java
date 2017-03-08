@@ -1,7 +1,7 @@
+/*
 package SystemMonitor;
 
 import oshi.*;
-import oshi.jna.platform.windows.PowrProf;
 import oshi.software.os.*;
 import oshi.hardware.*;
 import oshi.util.*;
@@ -17,10 +17,7 @@ public class BatteryInfo {
         abstractionLayer = hal;
         operatingSystem = os;
         battery = new PowrProf.SystemBatteryState();
-    }
-
-    public static byte getBatteryPresence() {
-        return battery.batteryPresent;
+        hal.getPowerSources()[0].
     }
 
     public static byte isCharging() {
@@ -36,3 +33,5 @@ public class BatteryInfo {
     }
 
 }
+
+*/
