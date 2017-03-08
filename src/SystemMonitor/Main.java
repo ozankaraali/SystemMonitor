@@ -42,5 +42,6 @@ public class Main {
         ProcessorInfo.setupOSHI(si, hal, os);
         MemoryInfo.setupOSHI(si, hal, os);
         BatteryInfo.setupOSHI(si, hal, os);
+        System.out.println(si.getHardware().getComputerSystem().toString());
     }
 }
