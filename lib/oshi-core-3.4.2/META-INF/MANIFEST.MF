@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Implementation-Title: oshi-core
+Copyright: 2017
+Implementation-Version: 3.4.2
+Built-By: danielwiddis
+Specification-Vendor: oshi
+Os-Arch: x86_64
+Specification-Title: oshi-core
+Implementation-Vendor-Id: com.github.oshi
+Os-Name: Mac OS X
+Implementation-Vendor: oshi
+Os-Version: 10.12.3
+X-Compile-Target-JDK: 1.7
+Build-Time: 2017-03-02 08:31:09
+Git-Revision: 
+X-Compile-Source-JDK: 1.7
+Created-By: Apache Maven 3.3.9
+Build-Jdk: 1.8.0_60
+Specification-Version: 3.4
+Implementation-URL: https://github.com/oshi/oshi/oshi-core
+

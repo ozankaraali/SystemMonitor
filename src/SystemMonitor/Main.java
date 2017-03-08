@@ -27,10 +27,7 @@ public class Main {
         main.setVisible(true);
         */
 
-        System.out.println(BatteryInfo.getBatteryPresence());
-        System.out.println(BatteryInfo.getRemainingCapacity());
-        System.out.println(BatteryInfo.getTotalCapacity());
-        System.out.println(BatteryInfo.isCharging());
+        System.out.println(ProcessorInfo.getIdentifier());
 
 
     }
@@ -42,5 +39,7 @@ public class Main {
         ProcessorInfo.setupOSHI(si, hal, os);
         MemoryInfo.setupOSHI(si, hal, os);
         BatteryInfo.setupOSHI(si, hal, os);
+        // DiskInfo doesn't use OSHI but let's set it up anyways ¯\_(ツ)_/¯
+        DiskInfo.setup();
     }
 }
