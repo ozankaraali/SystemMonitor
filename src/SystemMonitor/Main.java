@@ -2,6 +2,7 @@ package SystemMonitor;
 
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
+import oshi.jna.platform.windows.PowrProf;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
 
@@ -11,10 +12,12 @@ public class Main {
     public static void main(String[] args){
         //SystemMonitor.ProcessorInfo
         setupOSHI();
-
-        OSProcess[] list = ProcessorInfo.getProcessesList();
-        System.out.println("lul");
         /*
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+        } catch (Exception e) {
+            System.exit(1);
+        }
         JFrame main = new JFrame();
         JTabbedPane mainPanel = new JTabbedPane();
         main.add(mainPanel);
@@ -22,7 +25,13 @@ public class Main {
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         main.setSize(800,600);
         main.setVisible(true);
-         */
+        */
+
+        System.out.println(BatteryInfo.getBatteryPresence());
+        System.out.println(BatteryInfo.getRemainingCapacity());
+        System.out.println(BatteryInfo.getTotalCapacity());
+        System.out.println(BatteryInfo.isCharging());
+
 
     }
 
@@ -31,5 +40,7 @@ public class Main {
         HardwareAbstractionLayer hal = si.getHardware();
         OperatingSystem os = si.getOperatingSystem();
         ProcessorInfo.setupOSHI(si, hal, os);
+        MemoryInfo.setupOSHI(si, hal, os);
+        BatteryInfo.setupOSHI(si, hal, os);
     }
 }
