@@ -14,13 +14,14 @@ public class Main {
         setupOSHI();
         /*
         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             System.exit(1);
         }
         JFrame main = new JFrame();
         JTabbedPane mainPanel = new JTabbedPane();
         main.add(mainPanel);
+        mainPanel.addTab("lul", new JPanel());
         mainPanel.addTab("lul", new JPanel());
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         main.setSize(800,600);
@@ -39,10 +40,6 @@ public class Main {
         ProcessorInfo.setupOSHI(si, hal, os);
         MemoryInfo.setupOSHI(si, hal, os);
         // DiskInfo doesn't use OSHI but let's set it up anyways ¯\_(ツ)_/¯
-        PowerSource[] sources = hal.getPowerSources();
-        for(PowerSource source: sources) {
-            System.out.println(source.getName());
-        }
         DiskInfo.setup();
     }
 }
