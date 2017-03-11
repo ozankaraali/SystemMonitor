@@ -11,7 +11,22 @@ public class NetworkInterface {
 
     public void updateNetworkStats() {
         IF.updateNetworkStats();
+        IF.
     }
 
-    // methods about NetworkIF goes here
+    public String getName() {
+        return IF.getDisplayName();
+    }
+
+    public String[] getIPAdress() {
+        return IF.getIPv4addr();
+    }
+
+    public String getMacAdress() {
+        return IF.getMacaddr();
+    }
+
+    public long getSpeed() {
+        return IF.getSpeed();
+    }
 }
