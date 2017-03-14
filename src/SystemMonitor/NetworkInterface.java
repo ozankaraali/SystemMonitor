@@ -11,7 +11,6 @@ public class NetworkInterface {
 
     public void updateNetworkStats() {
         IF.updateNetworkStats();
-        IF.
     }
 
     public String getName() {
