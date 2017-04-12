@@ -16,6 +16,7 @@ public class MemoryService {
         abstractionLayer = hal;
         operatingSystem = os;
         memory = hal.getMemory();
+        hal.getMemory();
     }
 
     public long getTotalMemory() {
