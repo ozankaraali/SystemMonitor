@@ -57,4 +57,8 @@ public class ProcessorService {
     public OSProcess[] getProcessesList(){
         return operatingSystem.getProcesses(500, OperatingSystem.ProcessSort.MEMORY);
     }
+
+    public int getProcessCount() {
+        return operatingSystem.getProcessCount();
+    }
 }
