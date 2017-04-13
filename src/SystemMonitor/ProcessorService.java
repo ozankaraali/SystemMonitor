@@ -46,16 +46,12 @@ public class ProcessorService {
         return FormatUtil.formatElapsedSecs(abstractionLayer.getProcessor().getSystemUptime());
     }
 
-    public int getProcesses(){
-        return operatingSystem.getProcessCount();
-    }
-
     public int getThreads(){
         return operatingSystem.getThreadCount();
     }
 
-    public OSProcess[] getProcessesList(){
-        return operatingSystem.getProcesses(500, OperatingSystem.ProcessSort.MEMORY);
+    public OSProcess[] getProcessesList(OperatingSystem.ProcessSort sort){
+        return operatingSystem.getProcesses(500, sort);
     }
 
     public int getProcessCount() {
