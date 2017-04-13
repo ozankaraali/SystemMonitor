@@ -28,6 +28,7 @@ public class Main {
 
         mainTabPane.addTab("Disk", diskPanel);
         mainTabPane.addTab("Battery", batteryPanel);
+        mainTabPane.addTab("Processes", new ProcessesPanel(services));
 
         // Set the status bar
         StatusBar statusBar = new StatusBar(services);

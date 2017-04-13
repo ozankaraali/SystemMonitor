@@ -25,7 +25,7 @@ public class StatusBar extends JPanel {
         JPanel p3 = new JPanel();
 
         this.procCount = new JLabel("Processes: " + services.processorService.getProcessCount());
-        this.cpuUsage = new JLabel("CPU Usage: " + services.processorService.getSystemCpuLoad());
+        this.cpuUsage = new JLabel("CPU Usage: " + (int) services.processorService.getSystemCpuLoad() + "%");
         this.memUsage = new JLabel("Memory Usage: " + getMemUsageText());
 
         p1.add(procCount);

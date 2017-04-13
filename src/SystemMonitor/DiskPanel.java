@@ -10,7 +10,7 @@ public class DiskPanel extends JPanel {
 
     public DiskPanel(ServiceHolder services) {
         super();
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        // this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.services = services;
         setupPanel();
     }
