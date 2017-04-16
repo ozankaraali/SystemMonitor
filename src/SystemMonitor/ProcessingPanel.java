@@ -38,7 +38,7 @@ public class ProcessingPanel extends JPanel  {
         double[] loads = services.processorService.getCpuLoads();
 
         for(int i = 0; i < services.processorService.getLogicalProcessorCount(); i++) {
-            cpuLoadDisplay c = new cpuLoadDisplay("Core" + i, loads[i]);
+            cpuLoadDisplay c = new cpuLoadDisplay("Core" + (i + 1), loads[i]);
 
             cpuLoadDisplays.add(c);
             coreLoads.add(c);
