@@ -30,6 +30,10 @@ public class ProcessorService {
         return centralProcessor.getLogicalProcessorCount();
     }
 
+    public double[] getCpuLoads() {
+        return centralProcessor.getProcessorCpuLoadBetweenTicks();
+    }
+
     public String getIdentifier(){
         return centralProcessor.getIdentifier();
     }
@@ -42,16 +46,24 @@ public class ProcessorService {
         return centralProcessor.getSystemCpuLoad()*100;
     }
 
-    public String getSystemUptime(){
-        return FormatUtil.formatElapsedSecs(abstractionLayer.getProcessor().getSystemUptime());
+    public long getSystemUptime(){
+        return centralProcessor.getSystemUptime();
+    }
+
+    public String getFrequency() {
+        return Long.toString(centralProcessor.getVendorFreq());
     }
 
     public int getThreads(){
         return operatingSystem.getThreadCount();
     }
 
+    public boolean is64Bit() {
+        return centralProcessor.isCpu64bit();
+    }
+
     public OSProcess[] getProcessesList(OperatingSystem.ProcessSort sort){
-        return operatingSystem.getProcesses(500, sort);
+        return operatingSystem.getProcesses(200, sort);
     }
 
     public int getProcessCount() {

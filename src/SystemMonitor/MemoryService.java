@@ -16,7 +16,6 @@ public class MemoryService {
         abstractionLayer = hal;
         operatingSystem = os;
         memory = hal.getMemory();
-        hal.getMemory();
     }
 
     public long getTotalMemory() {
@@ -29,6 +28,14 @@ public class MemoryService {
 
     public long getFreeMemory() {
         return memory.getAvailable();
+    }
+
+    public long getTotalSwap() {
+        return memory.getSwapTotal();
+    }
+
+    public long getUsedSwap() {
+        return memory.getSwapUsed();
     }
 
 }

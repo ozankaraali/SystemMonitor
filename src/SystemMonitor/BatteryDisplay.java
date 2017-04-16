@@ -19,21 +19,18 @@ public class BatteryDisplay extends JPanel {
 
     private void init() {
         name = new JLabel(battery.getName());
+        name.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
         timeRemaining = new JLabel(battery.toString());
+        timeRemaining.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
         remainingPercent = new JProgressBar(0, 100);
         int percentage = (int) Math.round(battery.getRemainingPercent() * 100);
         remainingPercent.setValue(percentage);
         JLabel percentageLabel = new JLabel("%" + percentage + " charged.");
+        percentageLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
 
         this.add(name);
         this.add(timeRemaining);
         this.add(percentageLabel);
         this.add(remainingPercent);
-    }
-
-    public void updateStats() {
-        name.setText(battery.getName());
-        timeRemaining.setText(Double.toString(battery.getTimeRemaining()));
-        remainingPercent.setValue((int) Math.round(battery.getRemainingPercent() * 100));
     }
 }
