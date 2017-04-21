@@ -9,34 +9,48 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.util.TimeZone;
+import java.util.*;
+import java.util.List;
 
 public class ProcessesPanel extends JPanel {
     private ServiceHolder services;
     private JTable table;
     private JScrollPane scrollPane;
-    private final String[] columnNames = {"Name", "PID", "Uptime"};
-    private String[][] data;
-    SimpleDateFormat dateFormat;
-    private JButton sortByMemory, sortByName, sortByPID, sortByUptime;
+    private JButton sortByMemory;
+    private JButton sortByName;
+    private JButton sortByPID;
     private JPanel buttonPanel;
     private JPanel dataPanel;
+    private CustomTableModel customTableModel;
+
+    private final String[] columnNames = {"Name", "PID", "Memory"};
+    private String[][] data;
+    private boolean isWindows;
+    SimpleDateFormat dateFormat;
+
     private OperatingSystem.ProcessSort sort;
 
     public ProcessesPanel(ServiceHolder services) {
         super(new BorderLayout());
-        sort = OperatingSystem.ProcessSort.CPU;
+        sort = OperatingSystem.ProcessSort.PID;
 
         dateFormat = new SimpleDateFormat("HH 'hours,' mm 'minutes and' ss 'seconds'");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         this.services = services;
 
+        isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+
         buttonPanel = new JPanel(new FlowLayout());
         dataPanel = new JPanel();
 
         setupPanel();
-        setupData(sort);
+
+        if(isWindows) {
+            setupDataWin(sort);
+        } else {
+            setupDataUnix(sort);
+        }
     }
 
     private String getHumanTime(long milliseconds) {
@@ -46,45 +60,116 @@ public class ProcessesPanel extends JPanel {
     private void setupPanel() {
         ButtonListener buttonListener = new ButtonListener();
         sortByName = new JButton("Sort by name");
-        sortByMemory = new JButton("Sort by memory");
         sortByPID = new JButton("Sort by PID");
-        sortByUptime = new JButton("Sort by uptime");
+        sortByMemory = new JButton("Sort by memory");
+
         sortByName.addActionListener(buttonListener);
         sortByMemory.addActionListener(buttonListener);
         sortByPID.addActionListener(buttonListener);
-        sortByUptime.addActionListener(buttonListener);
 
         buttonPanel = new JPanel(new FlowLayout());
 
         buttonPanel.add(sortByName);
-        buttonPanel.add(sortByMemory);
         buttonPanel.add(sortByPID);
-        buttonPanel.add(sortByUptime);
+        buttonPanel.add(sortByMemory);
 
         this.add(buttonPanel, BorderLayout.SOUTH);
+        table = new JTable();
+        table.setPreferredScrollableViewportSize(new Dimension(500, 200));
+        table.setFillsViewportHeight(true);
+        customTableModel = new CustomTableModel();
+        table.setModel(customTableModel);
+        scrollPane = new JScrollPane(table);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void setupData(OperatingSystem.ProcessSort sort) {
+    private void setupDataUnix(OperatingSystem.ProcessSort sort) {
         OSProcess[] processes = services.processorService.getProcessesList(sort);
-        data = new String[processes.length][3];
+        data = new String[processes.length][5];
 
         for(int i = 0; i < processes.length; i++) {
             // path, uptime, pid, name
             data[i][0] = processes[i].getName();
             data[i][1] = Integer.toString(processes[i].getProcessID());
-            data[i][2] = getHumanTime(processes[i].getUpTime());
+            data[i][2] = Long.toString(processes[i].getResidentSetSize() / (1024 * 1024)) + " MB";
         }
+    }
 
-        table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 200));
-        table.setFillsViewportHeight(true);
-        table.setModel(new CustomTableModel());
-        scrollPane = new JScrollPane(table);
-        this.add(scrollPane, BorderLayout.CENTER);
+    private void setupDataWin(OperatingSystem.ProcessSort sort) {
+        try {
+            Process process = Runtime.getRuntime().exec("tasklist /nh /fo CSV");
+            Scanner scan = new Scanner(process.getInputStream());
+            ArrayList<ArrayList<String>> processList = new ArrayList<>();
+
+            while(scan.hasNext()) {
+                String line = scan.nextLine();
+                line = line.replace("\"", "");
+                String[] info = line.split(",");
+
+                ArrayList<String> l = new ArrayList<>();
+                l.add(info[0]);
+                l.add(info[1]);
+                long ramInfo = Long.parseLong(info[4].substring(0, info[4].length() - 2).replace(".", "")) / (1024);
+                l.add(ramInfo + " MB");
+                processList.add(l);
+            }
+
+            scan.close();
+
+            data = new String[processList.size()][3];
+
+            for(int i = 0; i < processList.size(); i++) {
+                // name
+                data[i][0] = processList.get(i).get(0);
+                // pid
+                data[i][1] = processList.get(i).get(1);
+                // mem
+                data[i][2] = processList.get(i).get(2);
+            }
+
+            if(sort == OperatingSystem.ProcessSort.NAME) {
+                Arrays.sort(data, new Comparator<String[]>() {
+                    @Override
+                    public int compare(String[] o1, String[] o2) {
+                        return o1[0].toLowerCase().compareTo(o2[0].toLowerCase());
+                    }
+                });
+            } else if(sort == OperatingSystem.ProcessSort.PID) {
+                Arrays.sort(data, new Comparator<String[]>() {
+                    @Override
+                    public int compare(String[] o1, String[] o2) {
+                        int x = Integer.parseInt(o1[1]);
+                        int y = Integer.parseInt(o2[1]);
+
+                        return x - y;
+                    }
+                });
+            } else if(sort == OperatingSystem.ProcessSort.MEMORY) {
+                Arrays.sort(data, new Comparator<String[]>() {
+                    @Override
+                    public int compare(String[] o1, String[] o2) {
+                        int x = Integer.parseInt(o1[2].substring(0, o1[2].length() - 3));
+                        int y = Integer.parseInt(o2[2].substring(0, o2[2].length() - 3));
+
+                        return y - x;
+                    }
+                });
+            }
+        } catch(Exception e) {
+            System.out.println("Fatal error, closing.");
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     public void updateStats() {
-        setupData(sort);
+        if(isWindows) {
+            setupDataWin(sort);
+        } else {
+            setupDataUnix(sort);
+        }
+
+        customTableModel.fireTableDataChanged();
     }
 
     private class CustomTableModel extends AbstractTableModel {
@@ -120,18 +205,18 @@ public class ProcessesPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == sortByMemory) {
                 sort = OperatingSystem.ProcessSort.MEMORY;
-                setupData(sort);
             } else if(e.getSource() == sortByName) {
                 sort = OperatingSystem.ProcessSort.NAME;
-                setupData(sort);
             } else if(e.getSource() == sortByPID) {
                 sort = OperatingSystem.ProcessSort.PID;
-                setupData(sort);
-            } else if(e.getSource() == sortByUptime) {
-                sort = OperatingSystem.ProcessSort.OLDEST;
-                setupData(sort);
             } else {
 
+            }
+
+            if(isWindows) {
+                setupDataWin(sort);
+            } else {
+                setupDataUnix(sort);
             }
         }
     }
