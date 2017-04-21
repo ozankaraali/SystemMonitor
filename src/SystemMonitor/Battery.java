@@ -36,7 +36,7 @@ public class Battery {
         } else if(getTimeRemaining() < 0) {
             return "Unknown Error.";
         } else {
-            return dateFormat.format(getTimeRemaining() * 1000);
+            return dateFormat.format(getTimeRemaining() * 1000) + " of battery usage left.";
         }
     }
 }
