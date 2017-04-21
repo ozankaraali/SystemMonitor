@@ -25,7 +25,7 @@ public class BatteryService {
     public void generateBatteries() {
         batteries = new ArrayList<>();
         for(PowerSource powerSource: abstractionLayer.getPowerSources()) {
-            batteries.add(new Battery(powerSource));
+            // batteries.add(new Battery(powerSource));
             /*  Remove this comment in production.
             if(!powerSource.getName().equals("Unknown")) {
                 batteryList.add(new Battery(powerSource));

@@ -83,7 +83,7 @@ public class Main {
         mainPanel.add(statusBar, BorderLayout.SOUTH);
 
         // Usual swing stuff
-        mainFrame.setTitle("SystemMonitor - COMP112");
+        mainFrame.setTitle("SystemMonitor");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(800, 600);
         mainFrame.setVisible(true);
@@ -93,7 +93,6 @@ public class Main {
                 // Update panes and redraw the window
                 updateStats();
                 Thread.sleep(1000);
-
             } catch(Exception e) {
                 e.printStackTrace();
             }
