@@ -21,9 +21,11 @@ public class ProcessesPanel extends JPanel {
     private JButton sortByMemory, sortByName, sortByPID, sortByUptime;
     private JPanel buttonPanel;
     private JPanel dataPanel;
+    private OperatingSystem.ProcessSort sort;
 
     public ProcessesPanel(ServiceHolder services) {
         super(new BorderLayout());
+        sort = OperatingSystem.ProcessSort.CPU;
 
         dateFormat = new SimpleDateFormat("HH 'hours,' mm 'minutes and' ss 'seconds'");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -34,7 +36,7 @@ public class ProcessesPanel extends JPanel {
         dataPanel = new JPanel();
 
         setupPanel();
-        setupData(OperatingSystem.ProcessSort.CPU);
+        setupData(sort);
     }
 
     private String getHumanTime(long milliseconds) {
@@ -64,7 +66,6 @@ public class ProcessesPanel extends JPanel {
 
     private void setupData(OperatingSystem.ProcessSort sort) {
         OSProcess[] processes = services.processorService.getProcessesList(sort);
-        this.dataPanel.removeAll();
         data = new String[processes.length][3];
 
         for(int i = 0; i < processes.length; i++) {
@@ -80,6 +81,10 @@ public class ProcessesPanel extends JPanel {
         table.setModel(new CustomTableModel());
         scrollPane = new JScrollPane(table);
         this.add(scrollPane, BorderLayout.CENTER);
+    }
+
+    public void updateStats() {
+        setupData(sort);
     }
 
     private class CustomTableModel extends AbstractTableModel {
@@ -114,13 +119,17 @@ public class ProcessesPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == sortByMemory) {
-                setupData(OperatingSystem.ProcessSort.MEMORY);
+                sort = OperatingSystem.ProcessSort.MEMORY;
+                setupData(sort);
             } else if(e.getSource() == sortByName) {
-                setupData(OperatingSystem.ProcessSort.NAME);
+                sort = OperatingSystem.ProcessSort.NAME;
+                setupData(sort);
             } else if(e.getSource() == sortByPID) {
-                setupData(OperatingSystem.ProcessSort.PID);
+                sort = OperatingSystem.ProcessSort.PID;
+                setupData(sort);
             } else if(e.getSource() == sortByUptime) {
-                setupData(OperatingSystem.ProcessSort.OLDEST);
+                sort = OperatingSystem.ProcessSort.OLDEST;
+                setupData(sort);
             } else {
 
             }
