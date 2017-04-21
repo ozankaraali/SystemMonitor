@@ -1,8 +1,6 @@
 package SystemMonitor;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +9,7 @@ public class Main {
     public static DiskPanel diskPanel;
     public static ProcessingPanel processingPanel;
     public static BatteryPanel batteryPanel;
+    public static ProcessesPanel processesPanel;
     public static StatusBar statusBar;
 
     public static JFrame mainFrame;
@@ -70,15 +69,13 @@ public class Main {
         batteryPanel = new BatteryPanel(services);
         diskPanel = new DiskPanel(services);
         processingPanel = new ProcessingPanel(services);
+        processesPanel = new ProcessesPanel(services);
 
+        // Add the panels as tabs
         mainTabPane.addTab("Performance", processingPanel);
         mainTabPane.addTab("Disk", diskPanel);
         mainTabPane.addTab("Battery", batteryPanel);
-
-        // -------------------------------------------------
-        // TEMPORARILY DISABLED BECAUSE OF INCOMING REFACTOR
-        // -------------------------------------------------
-        mainTabPane.addTab("Processes", new ProcessesPanel(services));
+        mainTabPane.addTab("Processes", processesPanel);
 
         // Set the status bar
 
@@ -109,6 +106,7 @@ public class Main {
         batteryPanel.updateStats();
         statusBar.updateStats();
         processingPanel.updateStats();
+        processesPanel.updateStats();
 
         mainFrame.revalidate();
     }
