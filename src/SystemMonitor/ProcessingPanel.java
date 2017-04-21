@@ -1,9 +1,6 @@
 package SystemMonitor;
 
-import sun.plugin2.gluegen.runtime.CPU;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
