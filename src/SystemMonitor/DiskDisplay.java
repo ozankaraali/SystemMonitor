@@ -11,8 +11,9 @@ public class DiskDisplay extends JPanel {
     JProgressBar remainingPercent;
 
     public DiskDisplay(Disk disk) {
-        super();
+        super(new BorderLayout());
         this.disk = disk;
+        this.setPreferredSize(new Dimension(750, 60));
 
         init();
     }
@@ -20,7 +21,7 @@ public class DiskDisplay extends JPanel {
     private void init() {
         name = new JLabel(disk.getName());
         batteryDescription = new JLabel(disk.toString());
-        batteryDescription.setIcon(disk.getIcon());
+        name.setIcon(disk.getIcon());
         remainingPercent = new JProgressBar(0, 100);
         remainingPercent.setValue((int) Math.round(disk.getUsedToTotalRatio() * 100));
 
