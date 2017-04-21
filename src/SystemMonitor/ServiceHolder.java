@@ -21,8 +21,8 @@ public class ServiceHolder {
 
         batteryService = new BatteryService(si, hal, os);
         System.out.println("batteryService = new BatteryService(si, hal, os);");
-        networkService = new NetworkService(si, hal, os);
-        System.out.println("networkService = new NetworkService(si, hal, os);");
+        // networkService = new NetworkService(si, hal, os);
+        // System.out.println("networkService = new NetworkService(si, hal, os);");
         processorService = new ProcessorService(si, hal, os);
         System.out.println("processorService = new ProcessorService(si, hal, os);");
         memoryService = new MemoryService(si, hal, os);
