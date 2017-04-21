@@ -1,6 +1,7 @@
 package SystemMonitor;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class DiskPanel extends JPanel {
     private List<DiskDisplay> diskDisplays;
 
     public DiskPanel(ServiceHolder services) {
-        super();
+        super(new FlowLayout());
         // this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.services = services;
         setupPanel();
