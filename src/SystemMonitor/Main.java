@@ -101,12 +101,15 @@ public class Main {
     }
 
     public static void updateStats() {
+        long start = System.currentTimeMillis();
         diskPanel.updateStats();
         batteryPanel.updateStats();
         statusBar.updateStats();
         processingPanel.updateStats();
         processesPanel.updateStats();
+        long end = System.currentTimeMillis();
 
+        System.out.println("Time: " + (end - start) + " ms");
         mainFrame.revalidate();
     }
 }
