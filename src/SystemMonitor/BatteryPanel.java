@@ -9,6 +9,7 @@ public class BatteryPanel extends JPanel{
     private List<BatteryDisplay> batteryDisplays;
     private ServiceHolder services;
     private boolean batteryExists;
+
     public BatteryPanel(ServiceHolder services) {
         super();
         this.services = services;
@@ -29,8 +30,8 @@ public class BatteryPanel extends JPanel{
                 this.add(bDisplay);
             }
         } else {
-            this.setLayout(new BorderLayout());
-            this.add(new JLabel("<html><font size+=2>Batteries could not be found in your system!</font>"), BorderLayout.CENTER);
+            this.setLayout(new GridBagLayout());
+            this.add(new JLabel("<html><font size=6>Batteries could not be found in your system!</font>"));
         }
     }
 
