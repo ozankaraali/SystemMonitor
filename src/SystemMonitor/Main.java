@@ -78,7 +78,6 @@ public class Main {
         mainTabPane.addTab("Processes", processesPanel);
 
         // Set the status bar
-
         statusBar = new StatusBar(services);
         mainPanel.add(statusBar, BorderLayout.SOUTH);
 
@@ -92,7 +91,9 @@ public class Main {
             try {
                 // Update panes and redraw the window
                 updateStats();
-                Thread.sleep(1000);
+                // Fetching stats usually takes around 250-300ms
+                // we want to refresh every second so 700ms is fit
+                Thread.sleep(700);
             } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -101,15 +102,12 @@ public class Main {
     }
 
     public static void updateStats() {
-        long start = System.currentTimeMillis();
         diskPanel.updateStats();
         batteryPanel.updateStats();
         statusBar.updateStats();
         processingPanel.updateStats();
         processesPanel.updateStats();
-        long end = System.currentTimeMillis();
 
-        System.out.println("Time: " + (end - start) + " ms");
         mainFrame.revalidate();
     }
 }
