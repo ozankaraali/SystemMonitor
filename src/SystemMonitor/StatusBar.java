@@ -46,7 +46,8 @@ public class StatusBar extends JPanel {
     }
 
     public void updateStats() {
-        this.removeAll();
-        this.setupPanel();
+        procCount.setText("Processes: " + services.processorService.getProcessCount());
+        cpuUsage.setText("CPU Usage: " + (int) services.processorService.getSystemCpuLoad() + "%");
+        memUsage.setText("Memory Usage: " + getMemUsageText());
     }
 }
