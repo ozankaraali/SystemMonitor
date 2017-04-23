@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.List;
 
 public class ProcessesPanel extends JPanel {
     private ServiceHolder services;
@@ -51,10 +50,6 @@ public class ProcessesPanel extends JPanel {
         } else {
             setupDataUnix(sort);
         }
-    }
-
-    private String getHumanTime(long milliseconds) {
-        return dateFormat.format(milliseconds);
     }
 
     private void setupPanel() {
@@ -209,17 +204,9 @@ public class ProcessesPanel extends JPanel {
                 sort = OperatingSystem.ProcessSort.NAME;
             } else if(e.getSource() == sortByPID) {
                 sort = OperatingSystem.ProcessSort.PID;
-            } else {
-
             }
 
-            if(isWindows) {
-                setupDataWin(sort);
-            } else {
-                setupDataUnix(sort);
-            }
+            updateStats();
         }
     }
-
-
 }

@@ -3,7 +3,6 @@ package SystemMonitor;
 import oshi.*;
 import oshi.software.os.*;
 import oshi.hardware.*;
-import oshi.util.*;
 
 public class ProcessorService {
     private SystemInfo systemInfo;
@@ -59,11 +58,12 @@ public class ProcessorService {
     }
 
     public boolean is64Bit() {
+        // broken in windows
         return centralProcessor.isCpu64bit();
     }
 
     public OSProcess[] getProcessesList(OperatingSystem.ProcessSort sort){
-        return operatingSystem.getProcesses(200, sort);
+        return operatingSystem.getProcesses(1000, sort);
     }
 
     public int getProcessCount() {

@@ -3,7 +3,6 @@ package SystemMonitor;
 import oshi.*;
 import oshi.software.os.*;
 import oshi.hardware.*;
-import oshi.util.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +28,6 @@ public class BatteryService {
                 batteries.add(new Battery(powerSource));
             }
         }
-    }
-
-    public boolean batteryExists() {
-        return 0 != batteries.size();
     }
 
     public List<Battery> getBatteries() {

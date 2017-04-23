@@ -47,14 +47,6 @@ public class Disk {
         return "Total Space: " + readableFileSize(getTotalSpace()) + ", Used Space: " + readableFileSize(getUsedSpace());
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDisk(File disk) {
-        this.disk = disk;
-    }
-
     public Icon getIcon() {
         return icon;
     }

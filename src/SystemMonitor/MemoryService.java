@@ -3,7 +3,6 @@ package SystemMonitor;
 import oshi.*;
 import oshi.software.os.*;
 import oshi.hardware.*;
-import oshi.util.*;
 
 public class MemoryService {
     private SystemInfo systemInfo;
@@ -37,5 +36,4 @@ public class MemoryService {
     public long getUsedSwap() {
         return memory.getSwapUsed();
     }
-
 }
