@@ -17,7 +17,12 @@ public class Battery {
     }
 
     public double getRemainingPercent() {
-        return battery.getRemainingCapacity();
+        double percentage = battery.getRemainingCapacity();
+        if(percentage > 1.0) {
+            return 1.0;
+        } else {
+            return percentage;
+        }
     }
 
     public double getTimeRemaining() {
