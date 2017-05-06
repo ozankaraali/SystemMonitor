@@ -25,7 +25,7 @@ public class ProcessesPanel extends JPanel {
     private final String[] columnNames = {"Name", "PID", "Memory"};
     private String[][] data;
     private boolean isWindows;
-    SimpleDateFormat dateFormat;
+    private SimpleDateFormat dateFormat;
 
     private OperatingSystem.ProcessSort sort;
 
