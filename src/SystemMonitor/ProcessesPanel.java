@@ -31,7 +31,7 @@ public class ProcessesPanel extends JPanel {
 
     public ProcessesPanel(ServiceHolder services) {
         super(new BorderLayout());
-        sort = OperatingSystem.ProcessSort.PID;
+        sort = OperatingSystem.ProcessSort.MEMORY;
 
         dateFormat = new SimpleDateFormat("HH 'hours,' mm 'minutes and' ss 'seconds'");
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
